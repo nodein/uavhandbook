@@ -1,0 +1,68 @@
+
+\section{Concurrent Learning}\label{s:conc}
+The single hidden layer Neural-Network based adaptive elements used in this chapter are known to have the universal approximation property \cite{Haykin:98bk,hornik:itnn:1989}, i.e., given sufficient number of hidden-layer neurons there exists a set of ideal weights $W^*,V^*$ that brings the neural network output to within an $\epsilon$ neighborhood of the modeling error $\bar \Delta(x,\delta)$ (uncertainty). The adaptive laws in \eq{e:shladaptivelaws} are designed to minimize the instantaneous tracking error $e$. Although \thm{t:boundedness} guarantees boundedness of the tracking error $e$, it cannot be guaranteed that the adaptive weights will approach the ideal weights over the long term during a normal course of operation. It is useful to drive the weights closer towards their ideal values, as the resulting NN representation forms a good approximation of the uncertainty, which can result in improved performance, and can be used for planning and health-monitoring purposes.
+
+One limitation of the adaptive laws in \eq{e:shladaptivelaws} (without the $e$-modification term) is that at any instant of time, they are constrained to search for the ideal weights only in the direction of instantaneous tracking error reduction. In that sense these adaptive laws are equivalent to a gradient-descent or a greedy update. Therefore, the adaptive weights may not approach the ideal weights unless all directions in which the weights can evolve to reduce the tracking error are explored infinitely often during the course of operation. Intuitively, this explains why \emph{Persistency of Excitation} is required to guarantee weight convergence for most adaptive laws~(see e.g. \cite{boyd:automatica:86}). The idea in concurrent learning is to use specifically selected and online recorded data to ensure parameter convergence without requiring persistent excitation. If data is recorded when the system states are exciting, and if invariant system properties, such as modeling error information, can be inferred from the recorded data, then weight convergence can be guaranteed without requiring persistent excitation \cite{Chowdhary:phd:2010}. In an implementation of a concurrent learning adaptive controller, each measured data point is evaluated to determine whether it should be added to a ``history stack''. The maximum number of recorded data points is limited, and when this number is reached, new data points replace old points. Note that the history stack is not intended to be a buffer of last $p$ states. The approximation modeling error at a recorded data point, which is an invariant system property, is inferred from the recorded data point by noting that $\Delta(x_i,\delta_i)\approx\dot{\hat x}_i-\nu(x_i,\delta_i)$ where $\dot{\hat x}_i$ is the smoothed estimate of $\dot{x}_i$~\cite{Chowdhary:JGCD:10,Gelb:74bk}.  Adaptation happens concurrently on recorded and current data such that the instantaneous tracking error and the modeling error at all recorded data points simultaneously reduces \cite{Chowdhary:JGCD:10,Chowdhary:phd:2010,Chowdhary:CDC:10}.
+
+It was shown in \cite{Chowdhary:phd:2010} and \cite{Chowdhary:CDC:10} that for linearly parameterized uncertainties the requirement on persistency of excitation can be relaxed if online recorded data is used concurrently with instantaneous data for adaptation. If the uncertainty can be linearly parameterized, then
+\begin{equation}\label{e:lin_param_uncert}
+\bar \Delta(x,\delta)=W^{*^T}\phi(x,\delta)+\epsilon(x,\delta)
+\end{equation}
+where $W^*\in\mathbb{R}^l$ denotes the ideal weights that guarantee for a given basis function $\phi(x,\delta)\in\mathbb{R}^l$ $\sup_{\delta}\|\epsilon(x,\delta)\|\leq \bar\epsilon$ for some positive constant $\bar \epsilon$. In this case, the adaptive element can also be linearly parameterized in the form $\nu_{ad}=W^T\phi(x,\delta)$. In certain UAV applications, the basis functions for the modeling error are known (see for example the problem of wingrock control \cite{Singh:95}), in which case, the existence of an unknown ideal weight vector $W^*$ can be established such that $\bar \epsilon=0$. The representation in (\ref{e:lin_param_uncert}) can also be guaranteed for any continuous modeling error approximated over a compact domain if elements of $\phi$ consist of set of Gaussian radial bases functions and a scalar bias term $b_w$ (see \cite{Park:91,Haykin:98bk}).  For either of these linearly parameterized representations of the uncertainty, the following theorem can be proven~\cite{Chowdhary:phd:2010,Chowdhary:CDC:10,chowdhary:acc11:2011b}:
+
+\begin{theorem}\label{thm:conc_NN_AMIAC}
+    Consider the system
+    given by (\ref{e:pdot},\ref{e:vdot},\ref{e:quatdot},\ref{e:omdot}), with the inverse law \sys{e:inverselaw}, reference models (\ref{e:acrm},\ref{e:alcrm}) which is consistent with (\ref{e:pddrm},\ref{e:qddrm}),  where the gains are the same as those selected such that the system matrix in
+    \sys{e:edot} is Hurwitz. Assume further that the uncertainty is linearly parameterizable using an appropriate set of bases over a compact domain $D$, and that assumptions (\ref{ass:kcascade:FixedPoint},\ref{ass:kcascade:nullRegion}) hold. For each recorded data point $j$, let, $\epsilon_i(t)=W^T(t)\phi(x_i,\delta_i)-\hat\Delta(x_i,\delta_i)$, with $\hat\Delta(x_i,\delta_i)=\dot{\hat x}_i-\nu(x_i,\delta_i)$. Now consider the following update law for the weights of the RBF NN
+      \begin{equation}
+        \label{eq:Wdot_adapt_I_NN_AMIAC}
+        \dot{W}=-\Gamma_W\sigma(z)e^TPB - \sum\limits_{j = 1}^p \Gamma_W\sigma(x_i,\delta_i)\epsilon^T_{j},
+    \end{equation}
+    and assume that $Z=[\phi(z_1),....,\phi(z_p)]$ and $rank(Z)=l$. Let $B_\alpha$ be the largest compact ball in $D$, and assume $\zeta(0)\in B_\alpha$, define $\delta=\max(\beta,\frac{2\|PB\|\bar{\epsilon}}{\lambda_{\min}(Q)}+\frac{p\bar{\epsilon}\sqrt{l}}{\lambda_{\min}(\Omega)})$, and assume that $D$ is sufficiently large such that $m=\alpha-\delta$ is a positive scalar. If the states $x_rm$ of the bounded input bounded output reference model of (\ref{e:rmnopch}) remains bounded in the compact ball $B_m=\{x_{rm}:\|x_{rm}\|\leq m\}$ for all $t\geq0$ then the tracking error $e$ and the weight error $\tilde W=W-W^*$  are uniformly ultimately bounded. Furthermore, if the representation in (\ref{e:lin_param_uncert}) is exact over the entire operating domain, that is $\bar \epsilon=0$, then the tracking error and weight error converge exponentially fast to a compact ball around the origin for arbitrary initial conditions, with the rate of convergence directly proportional to the minimum singular value of the history stack matrix $Z$.
+\end{theorem}
+\begin{remark}
+    The size of the compact ball around the origin where the weight and tracking error converge is dependent on the representation error $\bar\epsilon$ and the estimation error $\breve\epsilon=\max_i\|\dot x_i-\dot{\hat{x}}_i\|$. The former can be reduced by choosing appropriate number of RBFs across the operating domain, and the latter can be reduced by an appropriate implementation of a fixed point smoother. Note that $\dot{\hat{x}}(t)$ is not needed at a current instant $t$. Therefore, an appropriate implementation of a fixed point smoother alleviates several issues faced in estimating $\dot{\hat{x}}(t)$ by using recorded data before and after a data point is recorded to form very accurate estimates of $\dot{\hat{x}}_i$~\cite{Gelb:74bk,Chowdhary:JGCD:10}.
+\end{remark}
+The history stack matrix $Z=[\phi(z_1),....,\phi(z_p)]$ is not a buffer of last $p$ states. It can be updated online by including data points that are of significant interest over the course of operation. In the linearly parameterized case, convergence is guaranteed as soon as the history stack becomes full ranked. New data points could replace existing data points once the history stack reaches a pre-determined size. It was shown in \cite{chowdhary:acc11:2011b} that the rate of convergence of the tracking error and weights is directly proportional to the minimum singular value of $Z$. This provides a useful metric to determine which data points are most useful for improving convergence. Consequently, an algorithm for adding points that improve the minimum singular value of $Z$ for the case of linearly parameterizable uncertainty was presented in \cite{chowdhary:acc11:2011b}. %Robustness of the approach to estimation errors in $\dot{x}_i$ can be established.
+The main limitation of the linearly parameterized RBF NN representation of the uncertainty is that the RBF centers need to be preallocated over an estimated compact domain of operation $D$. Therefore, if the system evolves outside of $D$ all benefits of using adaptive control are lost. This can be addressed by evolving the RBF basis to reflect the current domain of operation, a reproducing kernel Hilbert space approach for accomplishing this was presented in \cite{Kingravi:TNN:2012}.
+
+On the other hand, the nonlinearly parameterized NN described in Section \ref{s:network} is more flexible: it only requires the uncertainties to be bounded over a compact set, but does not require that the domain of operation be known. However, it is typically more difficult to analyze due to the nonlinear parameterizations. In \cite{Chowdhary:JGCD:10} a concurrent learning adaptive law was proposed for SHL NN, and was validated in flight on the GTMax rotorcraft (see Section \ref{s:conc_flight_test}). In particular, the following theorem can be proven~\cite{Chowdhary:JGCD:10,Chowdhary:phd:2010}
+\begin{theorem}\label{th:bg_bounded}
+    Consider the system given by (\ref{e:pdot},\ref{e:vdot},\ref{e:quatdot},\ref{e:omdot}), with the inverse law \sys{e:inverselaw}, reference models (\ref{e:acrm},\ref{e:alcrm}) which is consistent with (\ref{e:pddrm},\ref{e:qddrm}),  where the gains are the same as those selected such that the system matrix in \sys{e:edot} is Hurwitz and assumptions (\ref{ass:kcascade:CommandBounded},\ref{ass:kcascade:NetworkApproxHolds},\ref{ass:kcascade:IdealWeightsBounded},\ref{ass:kcascade:FixedPoint},\ref{ass:kcascade:nullRegion}) are met. Let $i \in \aleph$ denote the index of an online recorded data point $z_i$, define $r_{b_i}(t)=\nu_{ad}(z_i)-\hat{\Delta}(z_i)$, where $\hat{\Delta}(z)=\dot{\hat{x}}_i-\nu_i$ and $\dot{\hat{x}}_i$ is the smoothed estimate of $\dot{x}_i$, and consider the following adaptive law
+\begin{eqnarray}
+    \label{eq:bg_learninglaw}
+    \dot W(t) &=&  - (\sigma(V^T(t)\bar{x}(t))  - \sigma '(V^T(t)\bar x(t))V^T(t) \bar x(t))r^T(t) \Gamma _w -k\|e(t)\|W(t) \nonumber \\
+    && - W_c(t) \sum\limits_{i = 1}^p {(\sigma(V^T(t)\bar{x}_i)  - \sigma'(V^T(t)\bar{x}_i)V^T(t) \bar x_i )r_{b_i }^T(t) \Gamma _w }, \\
+    \dot V(t) &=&  - \Gamma _V \bar x(t)r^T(t) W^T(t) \sigma'(V^T(t)\bar{x}(t)) -k\|e(t)\|V(t) - \nonumber \\
+    && V_c(t) \sum\limits_{i = 1}^p {\Gamma _V \bar x_i r_{b_i }^T(t) W^T(t) \sigma '(V^T(t)\bar{x}_i)},
+    \end{eqnarray}
+where $W_c$, $V_c$ are orthogonal projection operators that restrict the update based on the recorded data in the null-space of update based on current data:
+    \begin{align}
+\label{eq:WcVc}
+    W_c &=I-\frac{(\sigma(V^T\bar{x})  - \sigma '(V^T\bar x)V^T \bar x)(\sigma(V^T\bar{x})  - \sigma '(V^T\bar x)V^T \bar x)^T}{(\sigma(V^T\bar{x})  - \sigma '(V^T\bar x)V^T \bar x)^T(\sigma(V^T\bar{x})  - \sigma '(V^T\bar x)V^T \bar x)},\nonumber \\
+    V_c &=I-\frac{\Gamma_V\bar{x}\bar{x}^T\Gamma_V}{\bar{x}^T\Gamma_V\Gamma_V\bar{x}}.
+\end{align}
+with, $\Gamma_W, \Gamma_V > 0$, $\kappa > 0$ with lower-limit stated
+in the proof, and the external command $x_c(t)$ is such that $e_r(t)
+\in \lvl(P_r,\rho)$, for some $\rho
+> 0$, then, the command tracking error, $\bfer$, the reference model
+tracking error, $\bfe$, and adaptive element weights ($\Wt,\Vt$) are uniformly
+ultimately bounded. Further, the plant states, $x$, are ultimately
+bounded.
+\end{theorem}
+
+\todo[inline,color=green]{I changed the statements in the above paragraph, previously it implied that given hidden layer neurons, there exists ideal weights that will bring it to a given epsilon of function error which is incorrect. It should be Given epsilon there exists $n_2$ and a set of ideal weights...}
+\todo[inline,color=green]{Either remove the time dependency or go and add time dependency everywhere. If there is a particular reason we should have the time dependency}
+\todo[inline,color=green]{Need the time dependency here, added a sentence about it}
+\todo[inline,color=green]{Are the x, z etc explained ?}
+\todo[inline,color=green]{I think this is a good place for the update laws and perhaps a theorem}
+
+
+For the nonlinearly parameterized neural network, the simplest way to record a data point $x(t)$ online is to ensure that for a given $\bar\theta\in\Re^+$,
+\begin{equation}
+\label{eq:points_criterion}
+\frac{\|x(t)-x_k\|^2}{\|x(t)\|} \geq \bar\theta,
+\end{equation}
+where $x_k$ is the last recorded data point. The points can be stored in an online history stack which contains a maximum of $\bar p$ points. Once the maximum number of recorded points are reached, points are added such that the newest point replaces the oldest one.
+
+

@@ -1,0 +1,68 @@
+\title{Adaptive Control of Unmanned Aerial Vehicles - Theory and Flight Tests}
+\author{
+        Suresh K. Kannan \\
+        Controls Group, Systems Department\\
+        United Technologies Research Center\\
+        East Hartford, CT 06118\\
+            \and
+        Girish V. Chowdhary\\
+        Department of Aeronautics and Astronautics\\
+        Massachusetts Institute of Technology\\
+        Cambridge, MA 02139
+                \and
+        Eric N. Johnson\\
+        School of Aerospace Engineering\\
+        Georgia Institute of Technology\\
+        Atlanta, GA 30332
+}
+\date{\today}
+
+
+\documentclass[12pt]{article}
+\usepackage{hyperref}
+\usepackage{amsmath,latexsym,amssymb,subeqnarray,bm,textcomp}
+\usepackage{verbatim,alltt}
+\usepackage{amsthm}
+\usepackage{cancel,ifthen,wrapfig}
+\usepackage{fullpage}
+\usepackage{subfigure}
+%\usepackage{todonotes}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=red,pdftitle=Adaptive Control of Unmanned Aerial Vehicles - Theory and Flight Tests,pdfauthor=Suresh K. Kannan}
+%\usepackage{showkeys}
+\input{shortcuts}
+\ifx\pdfoutput\undefined
+  \usepackage[dvips,final]{graphicx}  % using latex+dvips
+  \usepackage[dvips,usenames]{color}
+\else
+  \usepackage[pdftex,final]{graphicx} % using pdflatex
+  \usepackage[pdftex,usenames]{color}
+\fi
+\graphicspath{{./figures/}}
+\usepackage[disable]{todonotes}
+
+
+\begin{document}
+\maketitle
+\listoftodos
+\begin{abstract}
+Typically, unmanned aerial vehicles are underactuated systems i.e., they have fewer independent control inputs than degrees of freedom. In a helicopter for example, the body-axis roll, pitch, yaw and altitude axis are fully actuated. However, lateral and longitudinal translational motion is only possible by tilting the thrust vector. This chapter develops a 6 degree-of-freedom flight control algorithm that can track both position and attitude trajectories. Approximate inverse models for vehicle attitude and position dynamics are used for feedback linearization leading to an inner-loop that tracks attitude and angular rate and an outer-loop that tracks position and velocity commands. A single adaptive element is used to compensate for inversion errors (uncertainty) in both loops. A key challenge in realizing an adaptive control design on real aircraft is dealing with actuator magnitude and rate saturation. Such saturation elements cannot be easily captured in inverse models and leads to incorrect learning in the adaptive element during periods of saturation. A mechanism to exactly remove such incorrect learning is provided. Additionally, nonlinear reference models are introduced to mitigate the risks of the closed loop system entering regions of the flight envelope that result in loss-of-controllability. The resulting adaptive controller accepts trajectory commands comprising of desired position, velocity, attitude and angular velocity and produces normalized actuator signals required for flight control. A modification to the baseline adaptive control system is also provided that enables long-term retention of the uncertainty approximation within the adaptive element. This architecture is validated through flight-tests on several fixed wing and rotorcraft UAVs, including a $145~lb$ helicopter UAV (Yamaha R-Max or GTMax), a scale model fixed-wing aircraft (GTEdge), and a small ducted-fan (GTSpy).
+\end{abstract}
+%One method of dealing with such systems is to design controllers for two cascaded fully-actuated subsystems: an inner-loop attitude control system and an outer-loop velocity and position control system.
+%The primary development and discussion will be one for a helicopter UAV, however the adaptive control architecture has been applied and successfully flown on fixed-wing aircraft as well.
+
+\input{intro}
+\input{controller}
+\input{concurrent_learning}
+\input{flighttests}
+
+\section{Summary}
+The objective in this chapter has been to provide an affordable control design solution that uses minimal prior knowledge of the vehicle dynamics. This is accomplished by relying on adaptation to cover the flight envelope of the helicopter under nominal conditions. Under mission specific variations in the environment and system dynamics due to payload changes or damage, adaptation allows little or no human intervention after deployment. This approach is also in agreement with the DoD UAS Roadmap which subscribes to the following view on UAV's \emph{...affordability will be treated as a key performance parameter (KPP) equal to, if not more important than, schedule and technical performance...}.
+
+\appendix
+\input{network}
+%\input{mrac}
+
+\bibliographystyle{abbrv}
+\bibliography{kannan,controls,external,bibtex_database_Chowdhary}
+
+\end{document}

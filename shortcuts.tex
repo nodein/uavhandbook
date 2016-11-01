@@ -1,0 +1,239 @@
+%\newenvironment{remark}{\begin{quotation}}{\end{quotation}}
+\newtheorem{remark}{Remark}
+\newtheorem{assumption}{Assumption}
+%\newenvironment{note}{\begin{quotation}}{\end{quotation}}
+\newtheorem{note}{Remark}
+\newtheorem{lemma}{Lemma}
+%\newenvironment{theorem}{\begin{quotation}}{\end{quotation}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{fact}{Fact}
+\newtheorem{claim}{Claim}
+%\newcommand{\mreal}[1][]{\ensuremath{\mathbb{R}^{#1}}}
+%Editing shortcuts
+%\newcommand{\todo}[1]{\label{todo:#1}\textbf{(comt:{#2})}}
+\newcommand{\comt}[1]{\textbf{(comt:{#1})}}
+% Standard referencing shortcuts
+\newcommand{\eq}[1]{Eqn~(\ref{#1})}
+\newcommand{\eqrng}[2]{Eqns.~(\ref{#1}-\ref{#2})}
+\newcommand{\sys}[1]{(\ref{#1})}
+\newcommand{\sysrange}[2]{(\ref{#1} - \ref{#2})}
+\newcommand{\lem}[1]{Lemma~\ref{#1}}
+\newcommand{\thm}[1]{Theorem~\ref{#1}}
+\newcommand{\ass}[1]{Assumption~\ref{#1}}
+\newcommand{\asspg}[1]{Assumption~\ref{#1} (pg. \pageref{#1})}
+\newcommand{\cor}[1]{Corollary~\ref{#1}}
+\newcommand{\fig}[1]{\mbox{Fig.~\ref{#1}}}
+\newcommand{\rem}[1]{Remark~\ref{#1}}
+\newcommand{\secti}[1]{Section~\ref{#1}}
+\newcommand{\chap}[1]{Chapter~\ref{#1}}
+\newcommand{\appdx}[1]{Appendix~\ref{#1}}
+\newcommand{\defn}[1]{Definition~\ref{#1}}
+\newcommand{\defnpg}[1]{Definition~\ref{#1} (pg. \pageref{#1})}
+\newcommand{\fct}[1]{Fact~\ref{#1}}
+\newcommand{\clm}[1]{Claim~\ref{#1}}
+\newcommand{\pg}[1]{Page~\pageref{#1}}
+% Standard math shortcuts
+\newcommand{\inv}[1]{\ensuremath{#1^{-1}}}
+\newcommand{\dom}[1]{\ensuremath{\mathcal{D}_{#1}}}
+\newcommand{\real}[1]{\ensuremath{\mathcal{R}^{#1}}}
+\newcommand{\lvl}{\ensuremath{\Omega}}
+\newcommand{\nulldom}[1]{\ensuremath{\mathcal{C}_{#1}}}
+\newcommand{\mreal}[1]{\ensuremath{\mathcal{R}^{#1}}}
+\newcommand{\tr}[1]{\ensuremath{tr\left(#1\right)}}
+\newcommand{\defined}{\triangleq}
+\newcommand{\ssys}[1]{\ensuremath{(#1)}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newcommand{\fhat}{\ensuremath{\hat{f}}}
+\newcommand{\ghat}{\ensuremath{\hat{\bfg}}}
+\newcommand{\xd}{\ensuremath{\dot{x}}}
+\newcommand{\xdd}{\ensuremath{\ddot{x}}}
+\newcommand{\xbar}{\ensuremath{\bar{\bfx}}}
+
+\newcommand{\delh}{\ensuremath{\hat{\delta}}}
+\newcommand{\deldes}{\ensuremath{\delta_{des}}}
+\newcommand{\Del}{\ensuremath{\Delta}}
+\newcommand{\Delbar}{\ensuremath{\bar{\Del}}}
+\newcommand{\Deld}{\ensuremath{\Del'}}
+\newcommand{\nuad}{\ensuremath{\nu_{ad}}}
+\newcommand{\nuhad}{\ensuremath{\bar{\nu}_{ad}}}
+\newcommand{\nur}{\ensuremath{\nu_r}}
+\newcommand{\nuh}{\ensuremath{\nu_h}}
+\newcommand{\nucr}{\ensuremath{\nu_{cr}}}
+\newcommand{\nubcr}{\ensuremath{\bar{\nu}_{cr}}}
+\newcommand{\nulc}{\ensuremath{\nu_{lc}}}
+\newcommand{\domd}{\ensuremath{\mathcal{D}}}
+\newcommand{\sigbar}{\ensuremath{\bar{\sigma}}}
+
+\newcommand{\il}{inner loop}
+\newcommand{\ol}{outer loop}
+
+% Short cuts for q,omega,p,v derivatives, commands and desired
+\newcommand{\bfa}{\ensuremath{a}}
+\newcommand{\bfe}{\ensuremath{e}}
+\newcommand{\bfer}{\ensuremath{e_r}}
+\newcommand{\bfg}{\ensuremath{g}}
+\newcommand{\bfp}{\ensuremath{p}}
+\newcommand{\bfq}{\ensuremath{q}}
+\newcommand{\bfr}{\ensuremath{r}}
+\newcommand{\bfv}{\ensuremath{v}}
+\newcommand{\bfx}{\ensuremath{x}}
+\newcommand{\bfz}{\ensuremath{z}}
+\newcommand{\bfw}{\ensuremath{w}}
+\newcommand{\bfalpha}{\ensuremath{\alpha}}
+\newcommand{\bfdelta}{\ensuremath{\delta}}
+\newcommand{\bfepsilon}{\ensuremath{\epsilon}}
+\newcommand{\bfzeta}{\ensuremath{\zeta}}
+\newcommand{\bftheta}{\ensuremath{\theta}}
+\newcommand{\bfomega}{\ensuremath{\omega}}
+\newcommand{\bfsigma}{\ensuremath{\sigma}}
+\newcommand{\qd}{\ensuremath{\dot{\bfq}}}
+\newcommand{\od}{\ensuremath{\dot{\bfomega}}}
+\newcommand{\pd}{\ensuremath{\dot{\bfp}}}
+\newcommand{\vd}{\ensuremath{\dot{\bfv}}}
+
+\newcommand{\qc}{\ensuremath{\bfq_c}}
+\newcommand{\oc}{\ensuremath{\bfomega_c}}
+\newcommand{\pc}{\ensuremath{\bfp_c}}
+\newcommand{\vc}{\ensuremath{\bfv_c}}
+\newcommand{\ac}{\ensuremath{\bfa_c}}
+\newcommand{\alc}{\ensuremath{\bfalpha_c}}
+
+
+\newcommand{\qdes}{\ensuremath{\bfq_{des}}}
+\newcommand{\odes}{\ensuremath{\omega_{des}}}
+\newcommand{\pdes}{\ensuremath{p}_{des}}
+\newcommand{\vdes}{\ensuremath{v}_{des}}
+
+% x
+\newcommand{\xc}{\ensuremath{x_c}}
+\newcommand{\xr}{\ensuremath{x_r}}
+
+%Ref model shortcuts
+\newcommand{\qrm}{\ensuremath{\bfq_{r}}}
+\newcommand{\orm}{\ensuremath{\bfomega_{r}}}
+\newcommand{\prm}{\ensuremath{\bfp}_{r}}
+\newcommand{\vrm}{\ensuremath{\bfv}_{r}}
+\newcommand{\alrm}{\ensuremath{\alpha}_{r}}
+\newcommand{\arm}{\ensuremath{a}_{r}}
+
+
+%Pseudo, control shortcuts
+\newcommand{\aldes}{\ensuremath{\bfalpha_{des}}}
+\newcommand{\ades}{\ensuremath{\bfa_{des}}}
+\newcommand{\adesdelf}{\ensuremath{\bfa_{des_{\delf}}}}
+\newcommand{\adesq}{\ensuremath{\bfa_{des_{\bfq}}}}
+\newcommand{\alcrm}{\ensuremath{\bfalpha_{cr}}}
+\newcommand{\acrm}{\ensuremath{\bfa_{cr}}}
+\newcommand{\alpd}{\ensuremath{\bfalpha_{pd}}}
+\newcommand{\apd}{\ensuremath{\bfa_{pd}}}
+\newcommand{\alad}{\ensuremath{\bfalpha_{ad}}}
+\newcommand{\aad}{\ensuremath{\bfa_{ad}}}
+\newcommand{\alhad}{\ensuremath{\bar{\bfalpha}_{ad}}}
+\newcommand{\ahad}{\ensuremath{\bar{\bfa}_{ad}}}
+\newcommand{\alh}{\ensuremath{\bfalpha_{h}}}
+\newcommand{\ah}{\ensuremath{\bfa_{h}}}
+
+
+
+%Estimated pseudocontrol
+\newcommand{\alhat}{\ensuremath{\hat{\bfalpha}}}
+\newcommand{\ahat}{\ensuremath{\hat{\bfa}}}
+
+
+% Actuator shortcuts
+\newcommand{\delm}{\ensuremath{\bfdelta_m}}
+\newcommand{\delf}{\ensuremath{\bfdelta_f}}
+\newcommand{\delfq}{\ensuremath{\begin{bmatrix}\delta_f}\\ q\end{bmatrix}}
+\newcommand{\delmd}{\ensuremath{\dot{\bfdelta}_m}}
+\newcommand{\delfd}{\ensuremath{\dot{\bfdelta}_f}}
+\newcommand{\delhm}{\ensuremath{\hat{\bfdelta}_m}}
+\newcommand{\delhf}{\ensuremath{\hat{\bfdelta}_f}}
+\newcommand{\delmdes}{\ensuremath{\bfdelta_{m_{des}}}}
+\newcommand{\delfdes}{\ensuremath{\bfdelta_{f_{des}}}}
+\newcommand{\delhd}{\ensuremath{\dot{\hat{\bfdelta}}}}
+\newcommand{\delhmd}{\ensuremath{\dot{\hat{\bfdelta}}_m}}
+\newcommand{\delhfd}{\ensuremath{\dot{\hat{\bfdelta}}_f}}
+\newcommand{\delmin}{\ensuremath{\bfdelta_{min}}}
+\newcommand{\delmax}{\ensuremath{\bfdelta_{max}}}
+\newcommand{\deldmin}{\ensuremath{\dot{\bfdelta}_{min}}}
+\newcommand{\deldmax}{\ensuremath{\dot{\bfdelta}_{max}}}
+
+\newcommand{\delbar}{\ensuremath{\bar{\delta}}}
+\newcommand{\delubar}{\ensuremath{\underbar{\delta}}}
+\newcommand{\deldbar}{\ensuremath{\bar{\dot{\delta}}}}
+
+% proof shortcuts
+\newcommand{\ozhot}{\ensuremath{\mathcal{O}^2(\tilde{\bfz})}}
+\newcommand{\nztil}{\ensuremath{\|\tilde{Z}\|}}
+\newcommand{\nVt}{\ensuremath{\|\tilde{V}^T\|_F}}
+\newcommand{\nWt}{\ensuremath{\|\tilde{W}^T\|_F}}
+\newcommand{\nZtsq}{\ensuremath{\|\tilde{Z}\|_F^2}}
+\newcommand{\nZt}{\ensuremath{\|\tilde{Z}\|_F}}
+\newcommand{\nZ}{\ensuremath{\|Z\|_F}}
+\newcommand{\WsT}{\ensuremath{W^{*T}}}
+\newcommand{\WtT}{\ensuremath{\tilde{W}^T}}
+\newcommand{\VtT}{\ensuremath{\tilde{V}^T}}
+\newcommand{\Zbar}{\ensuremath{\bar{Z}}}
+\newcommand{\zt}{\ensuremath{\tilde{\bfz}}}
+\newcommand{\Zt}{\ensuremath{\tilde{Z}}}
+\newcommand{\Vt}{\ensuremath{\tilde{V}}}
+\newcommand{\Wt}{\ensuremath{\tilde{W}}}
+
+
+
+% nested saturation section
+
+\newcommand{\signslaw}{\ensuremath{\sigma_n(y_n+\sigma_{n-1}(y_{n-1}+\cdots+\sigma_1(y_1)))}}
+\newcommand{\signslawshort}{\ensuremath{\sigma_n(y_n + \sigma_{n-1}(\cdots\sigma_1(y_1)))}}
+\newcommand{\consatl}{conventional saturation}
+\newcommand{\linsatl}{linear saturation}
+\newcommand{\linsat}{linear saturation}
+\newcommand{\Linsat}{Linear Saturation}
+\newcommand{\consat}{conventional saturation}
+\newcommand{\Consat}{Conventional Saturation}
+\newcommand{\vecsat}{vector valued saturaion}
+\newcommand{\Vecsat}{Vector Valued Saturaion}
+
+% k-cascade systems
+\newcommand{\nonenk}{\ensuremath{n_1+\hdots+n_k}}
+\newcommand{\Nk}{\ensuremath{N_k}}
+\newcommand{\sze}{\ensuremath{z}}
+\newcommand{\sxi}{\ensuremath{\xi}}
+\newcommand{\szedes}{\ensuremath{\sze}_{des}}
+\newcommand{\sxides}{\ensuremath{\sxi}_{des}}
+\newcommand{\delsze}{\ensuremath{\delta_\sze}}
+\newcommand{\delsxi}{\ensuremath{\delta_\sxi}}
+\newcommand{\delszedes}{\ensuremath{\delta_{\sze_{des}}}}
+\newcommand{\delsxides}{\ensuremath{\delta_{\sxi_{des}}}}
+\newcommand{\delszeh}{\ensuremath{\hat{\delta}_\sze}}
+\newcommand{\delsxih}{\ensuremath{\hat{\delta}_\sxi}}
+\newcommand{\nusze}{\ensuremath{\nu_\sze}}
+\newcommand{\nusxi}{\ensuremath{\nu_\sxi}}
+\newcommand{\fsze}{\ensuremath{\phi}}
+\newcommand{\fsxi}{\ensuremath{\gamma}}
+\newcommand{\fszedes}{\ensuremath{\fsze_{des}}}
+\newcommand{\fsxides}{\ensuremath{\fsxi_{des}}}
+\newcommand{\fszedesdelsze}{\ensuremath{\fsze_{des_{\delsze}}}}
+\newcommand{\fszedessxi}{\ensuremath{\fsze_{des_{\sxi}}}}
+\newcommand{\fhsze}{\ensuremath{\hat{\fsze}}}
+\newcommand{\fhsxi}{\ensuremath{\hat{\fsxi}}}
+
+\newcommand{\ellip}{\ensuremath{\mathcal{E}}}
+
+
+% some shortcuts for denoting approximate functions
+\newcommand{\var}[2]{%
+\ifthenelse{\equal{#2}{}}%
+{\ensuremath{\breve{#1}^{#2}}}%
+{\ensuremath{\breve{#1}^{(#2)}}}%
+}
+\newcommand{\vardes}[2]{\ensuremath{#1|#2}}
+
+%\newcommand{\varndes}[2]{\ensuremath{#1~#2}}
