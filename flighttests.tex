@@ -952,14 +952,14 @@ Figure \ref{fig:steps_W_bg} and Figure \ref{fig:steps_V_bg} show the evolution o
 
 
 
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \includegraphics[scale=0.5]{steps_all_states}
 \caption{Recorded Body Frame States for Repeated Forward Steps}
 \label{fig:steps_all_states}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \subfigure[Evolution of inner loop errors with concurrent Adaptation]{\label{fig:steps_errors_il_bg}\includegraphics[scale=0.5]{steps_bg_il_errors}}
 \subfigure[Evolution of outer loop errors with concurrent Adaptation]{\label{fig:steps_errors_ol_bg}\includegraphics[scale=0.5]{steps_bg_ol_errors}}
@@ -968,7 +968,7 @@ Figure \ref{fig:steps_W_bg} and Figure \ref{fig:steps_V_bg} show the evolution o
 \end{figure}
 
 
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \subfigure[Evolution of $V$ matrix weights with Only Online Adaptation]{\label{fig:steps_V_o}\includegraphics[scale=0.5]{sim_online_v}}
 \subfigure[Evolution of $V$ matrix weights with concurrent Adaptation]{\label{fig:steps_V_bg}\includegraphics[scale=0.5]{steps_bg_V}}
@@ -987,14 +987,14 @@ Due to the aggressive acceleration profile of $30ft/s^2$ the rotorcraft collecti
 
 
 
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \includegraphics[scale=0.6]{all_states_agg_oval}
 \caption{Recorded Body Frame States for Repeated Oval Maneuvers}
 \label{fig:all_states_agg_ovals}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \subfigure[Evolution of inner loop errors with concurrent Adaptation]{\label{fig:bg_agg_sat_il_e}\includegraphics[scale=0.5]{bg_agg_sat_il_e}}
 \subfigure[Evolution of outer loop errors with concurrent Adaptation]{\label{fig:bg_agg_sat_ol_e}\includegraphics[scale=0.5]{bg_agg_sat_ol_e}}
@@ -1002,7 +1002,7 @@ Due to the aggressive acceleration profile of $30ft/s^2$ the rotorcraft collecti
 \label{fig:oval_sat_errors}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \includegraphics[scale=0.7]{bg_agg_sat_error_norm}
 \caption{Plot of the norm of the error at each time step for aggressive trajectory tracking with collective saturation}
@@ -1011,7 +1011,7 @@ Due to the aggressive acceleration profile of $30ft/s^2$ the rotorcraft collecti
 
 \subsubsection{Aggressive Trajectory Tracking Maneuver}
 For the results presented in this section, the acceleration profile was reduced to $20ft/sec^2$. At this acceleration profile, no saturation in the collective input was noted. Figure \ref{fig:oval_nosat_errors} shows the evolution of tracking error, and Figure \ref{fig:bg_agg_nosat_error_norm} shows the plot of the norm of the tracking error at each time step.
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \subfigure[Evolution of inner loop errors with concurrent Adaptation]{\label{fig:bg_agg_nosat_il_e}\includegraphics[scale=0.5]{bg_agg_nosat_il_e}}
 \subfigure[Evolution of outer loop errors with concurrent Adaptation]{\label{fig:bg_agg_nosat_ol_e}\includegraphics[scale=0.5]{bg_agg_nosat_ol_e}}
@@ -1019,7 +1019,7 @@ For the results presented in this section, the acceleration profile was reduced 
 \label{fig:oval_nosat_errors}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \subfigure[Evolution of the norm of the tracking error with concurrent Adaptation]{\label{fig:bg_agg_nosat_error_norm}\includegraphics[scale=0.42]{bg_agg_nosat_error_norm}}
 \subfigure[Evolution of the norm of the tracking error with only online Adaptation]{\label{fig:o_agg_nosat_error_norm}\includegraphics[scale=0.5]{online_agg_nosat_error_norm}}
@@ -1031,7 +1031,7 @@ For the results presented in this section, the acceleration profile was reduced 
 The performance of the concurrent learning adaptive controller is compared with the traditional instantaneous update based adaptive controllers for the maneuvers described in Section \ref{sec:bg_oval}.
 
 It is instructive to compare Figure \ref{fig:oval_V_bg}, and Figure \ref{fig:oval_W_bg} which show the evolution of the NN weights with only instantaneous learning with Figure \ref{fig:oval_V_o}, and Figure \ref{fig:oval_W_o} which show evolution of the NN weights with concurrent learning. Although absolute convergence of weights is not seen, as expected due to Theorem \ref{th:bg_bounded} it is interesting to see that when concurrent learning is on, the weights tend to be less oscillatory than when only instantaneous learning is used. Also, with combined online and concurrent learning, the weights do not tend to go to zero as the rotorcraft hovers between two successive tracking maneuver. Figure \ref{fig:o_agg_nosat_error_norm} shows the plot of the tracking error norm as a function of time without concurrent learning. Comparing this figure with Figure \ref{fig:bg_agg_nosat_error_norm} it can be clearly seen that the norm of the error vector is much higher when only online learning is used. This indicates that the combined online and concurrent learning adaptive controller has improved trajectory tracking performance.
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \subfigure[Evolution of $V$ matrix weights with Only Online Adaptation]{\label{fig:oval_V_o}\includegraphics[scale=0.5]{online_agg_nosat_V}}
 \subfigure[Evolution of $V$ matrix weights with concurrent Adaptation]{\label{fig:oval_V_bg}\includegraphics[scale=0.5]{bg_agg_nosat_V}}
